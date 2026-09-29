@@ -50,8 +50,8 @@ export default function Payment() {
 
   return (
     <div>
-      <header className="p-4 border-b flex gap-4">
-        <Link href="/checkout">‹ Back</Link>
+      <header className="relative p-4 border-b flex items-center justify-center">
+        <Link href="/checkout" className="absolute left-4">‹ Back</Link>
         <b>Secure Checkout</b>
       </header>
 
@@ -71,12 +71,10 @@ export default function Payment() {
           <div className="font-semibold mb-2">Payment Method</div>
           <div className="space-y-2">
             {METHODS.map((m) => (
-              <label
-                key={m.id}
-                className={`flex items-center gap-3 border rounded p-3 cursor-pointer ${
-                  method === m.id ? "border-black bg-gray-50" : ""
-                }`}
-              >
+                <label
+                  key={m.id}
+                  className="flex items-center gap-3 py-2 cursor-pointer"
+                >
                 <input
                   type="radio"
                   name="method"
@@ -94,7 +92,7 @@ export default function Payment() {
           <div className="text-sm space-y-1">
             <div className="flex justify-between"><span>Item(s)</span><span>{rp(subtotal)}</span></div>
             <div className="flex justify-between"><span>Tax (11%)</span><span>{rp(tax)}</span></div>
-            <div className="flex justify-between font-bold border-t pt-1">
+            <div className="flex justify-between">
               <span>Total</span><span>{rp(total)}</span>
             </div>
           </div>
