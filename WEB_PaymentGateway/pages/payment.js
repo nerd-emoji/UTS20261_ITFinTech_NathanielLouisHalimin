@@ -10,6 +10,7 @@ const METHODS = [
 ];
 
 const rp = (n) => "Rp" + n.toLocaleString("id-ID");
+const SHIPPING_FEE = 10000;
 
 export default function Payment() {
   const { cart, clear } = useCart();
@@ -20,7 +21,7 @@ export default function Payment() {
   const items = Object.values(cart);
   const subtotal = items.reduce((s, i) => s + i.product.price * i.qty, 0);
   const tax = Math.round(subtotal * 0.11);
-  const total = subtotal + tax;
+  const total = subtotal + tax + SHIPPING_FEE;
 
   async function pay() {
     setLoading(true);
@@ -92,9 +93,8 @@ export default function Payment() {
           <div className="text-sm space-y-1">
             <div className="flex justify-between"><span>Item(s)</span><span>{rp(subtotal)}</span></div>
             <div className="flex justify-between"><span>Tax (11%)</span><span>{rp(tax)}</span></div>
-            <div className="flex justify-between">
-              <span>Total</span><span>{rp(total)}</span>
-            </div>
+            <div className="flex justify-between"><span>Shipping</span><span>{rp(SHIPPING_FEE)}</span></div>
+            <div className="flex justify-between"><span>Total</span><span>{rp(total)}</span></div>
           </div>
         </div>
 

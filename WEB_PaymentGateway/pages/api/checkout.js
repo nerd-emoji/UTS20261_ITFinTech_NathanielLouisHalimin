@@ -8,6 +8,7 @@ const METHOD_MAP = {
   QRIS: ["QRIS"],
 };
 
+const SHIPPING_FEE = 10000;
 
 
 export default async function handler(req, res) {
@@ -25,9 +26,16 @@ export default async function handler(req, res) {
   });
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);
   const tax = Math.round(subtotal * 0.11);
-  const total = subtotal + tax;
+  const total = subtotal + tax + SHIPPING_FEE;
 
-  const checkout = await Checkout.create({ items: lines, subtotal, tax, total, shippingAddress });
+  const checkout = await Checkout.create({
+    items: lines,
+    subtotal,
+    tax,
+    shipping: SHIPPING_FEE,
+    total,
+    shippingAddress,
+  });
 
   const auth = Buffer.from(process.env.XENDIT_SECRET_KEY + ":").toString("base64");
   const base = process.env.NEXT_PUBLIC_BASE_URL;

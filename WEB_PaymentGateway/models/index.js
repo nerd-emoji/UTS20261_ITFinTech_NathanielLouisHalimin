@@ -13,6 +13,7 @@ const CheckoutSchema = new Schema({
   items: [{ productId: String, name: String, price: Number, qty: Number }],
   subtotal: Number,
   tax: Number,
+  shipping: Number,
   total: Number,
   shippingAddress: String,
   status: { type: String, default: "PENDING" }, // PENDING | LUNAS | EXPIRED
