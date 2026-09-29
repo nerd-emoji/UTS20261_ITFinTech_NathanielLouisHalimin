@@ -1,11 +1,21 @@
 import { connectDB } from "@/lib/mongodb";
 import { Product, Checkout, Payment } from "@/models";
 
+const METHOD_MAP = {
+  CARD: ["CREDIT_CARD"],
+  BANK: ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA"],
+  EWALLET: ["OVO", "DANA", "SHOPEEPAY", "LINKAJA"],
+  QRIS: ["QRIS"],
+};
+
+
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   await connectDB();
 
-  const { items, shippingAddress } = req.body; // items: [{id, qty}]
+  const { items, shippingAddress, paymentMethod } = req.body;
+  const allowed = METHOD_MAP[paymentMethod]; // whitelist di server
 
   // Hitung ulang harga dari DB (jangan percaya harga dari client)
   const products = await Product.find({ _id: { $in: items.map((i) => i.id) } });
@@ -30,6 +40,7 @@ export default async function handler(req, res) {
       amount: total,
       description: `Order ${checkout._id}`,
       currency: "IDR",
+      ...(allowed ? { payment_methods: allowed } : {}),
       success_redirect_url: `${base}/status?id=${checkout._id}`,
       failure_redirect_url: `${base}/status?id=${checkout._id}`,
     }),
@@ -37,12 +48,13 @@ export default async function handler(req, res) {
   const inv = await xr.json();
   if (!xr.ok) return res.status(500).json(inv);
 
-  await Payment.create({
-    checkoutId: checkout._id,
-    xenditInvoiceId: inv.id,
-    invoiceUrl: inv.invoice_url,
-    amount: total,
-  });
+await Payment.create({
+  checkoutId: checkout._id,
+  xenditInvoiceId: inv.id,
+  invoiceUrl: inv.invoice_url,
+  amount: total,
+  method: paymentMethod,
+});
 
   res.json({ checkoutId: checkout._id, invoiceUrl: inv.invoice_url });
 }
