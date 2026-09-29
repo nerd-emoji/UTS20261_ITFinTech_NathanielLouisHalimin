@@ -10,8 +10,10 @@ export default function Checkout() {
 
   return (
     <div>
-      <header className="p-4 border-b flex gap-4"><Link href="/">‹ Back</Link><b>Checkout</b></header>
-      {items.map(({ product, qty }) => (
+      <header className="relative p-4 border-b flex items-center justify-center">
+        <Link href="/" className="absolute left-4">‹ Back</Link>
+        <b>Secure Checkout</b>
+      </header>      {items.map(({ product, qty }) => (
         <div key={product._id} className="flex gap-3 p-4 border-b items-center">
           <div className="w-14 h-14 bg-gray-200 rounded" />
           <div className="flex-1">
