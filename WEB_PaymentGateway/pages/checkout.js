@@ -15,7 +15,11 @@ export default function Checkout() {
         <b>Secure Checkout</b>
       </header>      {items.map(({ product, qty }) => (
         <div key={product._id} className="flex gap-3 p-4 border-b items-center">
-          <div className="w-14 h-14 bg-gray-200 rounded" />
+        <div className="w-14 h-14 shrink-0 bg-gray-200 rounded overflow-hidden">
+          {product.image && (
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+          )}
+        </div>
           <div className="flex-1">
             <div>{product.name}</div>
             <div className="flex items-center gap-2 border rounded w-fit mt-1">
