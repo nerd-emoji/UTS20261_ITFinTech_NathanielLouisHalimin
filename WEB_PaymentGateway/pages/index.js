@@ -69,17 +69,24 @@ export default function SelectItem() {
         ))}
       </div>
       {list.map((p) => (
-        <div key={p._id} className="flex gap-3 p-4 border-b">
-        <div className="w-20 h-20 shrink-0 bg-gray-200 rounded overflow-hidden">
-          {p.image && (
-            <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-          )}
-        </div>
-          <div className="flex-1">
-            <div className="font-medium">{p.name}</div>
-            <div>Rp{p.price.toLocaleString("id-ID")}</div>
-            <div className="text-xs text-gray-400">{p.description}</div>
-            <button onClick={() => add(p)} className="mt-2 border rounded px-3 py-1 float-right">Add +</button>
+        <div key={p._id} className="p-4 border-b">
+          <div className="flex gap-4">
+            <div className="w-36 h-36 shrink-0 bg-gray-200 rounded overflow-hidden">
+              {p.image && (
+                <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+              )}
+            </div>
+            <div className="flex-1">
+              <div className="font-medium">{p.name}</div>
+              <div>Rp{p.price.toLocaleString("id-ID")}</div>
+              <div className="text-xs text-gray-400">{p.description}</div>
+            </div>
+          </div>
+
+          <div className="flex justify-end mt-3">
+            <button onClick={() => add(p)} className="border rounded px-3 py-1">
+              Add +
+            </button>
           </div>
         </div>
       ))}
