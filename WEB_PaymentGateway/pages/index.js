@@ -32,7 +32,18 @@ export default function SelectItem() {
         </button>
         <b>Logo</b>
       </div>
-      <Link href="/checkout">🛒 <span className="bg-red-500 text-white text-xs rounded-full px-2">{count}</span></Link>
+      <Link href="/checkout" aria-label="Keranjang" className="relative p-1 text-gray-800">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 3h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L20.5 7H6" />
+          <circle cx="9.5" cy="19.5" r="1.4" />
+          <circle cx="17" cy="19.5" r="1.4" />
+        </svg>
+        {count > 0 && (
+          <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-gray-600 text-white text-[10px] leading-none">
+            {count}
+          </span>
+        )}
+      </Link>
     </header>
 
     <div className="px-4 pb-4 border-b">
