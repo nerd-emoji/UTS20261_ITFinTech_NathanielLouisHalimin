@@ -31,7 +31,7 @@ export default function Checkout() {
         <div className="flex justify-between"><span>Subtotal</span><span>{rp(subtotal)}</span></div>
         <div className="flex justify-between"><span>Tax (11%)</span><span>{rp(tax)}</span></div>
         <div className="flex justify-between font-bold"><span>Total</span><span>{rp(subtotal + tax)}</span></div>
-        <Link href="/payment" className={`block text-center mt-4 p-3 rounded border ${items.length ? "" : "pointer-events-none opacity-40"}`}>
+        <Link href="/payment" className={`block text-center mt-4 p-3 bg-gray-200 rounded border ${items.length ? "" : "pointer-events-none opacity-40"}`}>
           Continue to Payment →
         </Link>
       </div>
