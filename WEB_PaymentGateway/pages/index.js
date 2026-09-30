@@ -70,7 +70,11 @@ export default function SelectItem() {
       </div>
       {list.map((p) => (
         <div key={p._id} className="flex gap-3 p-4 border-b">
-          <div className="w-20 h-20 bg-gray-200 rounded" />
+        <div className="w-20 h-20 shrink-0 bg-gray-200 rounded overflow-hidden">
+          {p.image && (
+            <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+          )}
+        </div>
           <div className="flex-1">
             <div className="font-medium">{p.name}</div>
             <div>Rp{p.price.toLocaleString("id-ID")}</div>
