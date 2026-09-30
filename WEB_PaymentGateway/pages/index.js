@@ -30,7 +30,7 @@ export default function SelectItem() {
             <line x1="4" y1="18" x2="20" y2="18" />
           </svg>
         </button>
-        <b>Logo</b>
+      <b className="text-2xl">Logo</b>
       </div>
       <Link href="/checkout" aria-label="Keranjang" className="relative p-1 text-gray-800">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -49,7 +49,7 @@ export default function SelectItem() {
     <div className="px-4 pb-4 border-b">
       <div className="relative">
         <input
-          className="w-full border rounded p-2 pr-10"
+          className="w-full border rounded-lg px-4 py-3 pr-12 text-lg border-gray-400"
           placeholder="Search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -63,13 +63,23 @@ export default function SelectItem() {
         </svg>
       </div>
     </div>
-      <div className="flex gap-4 px-4 border-b overflow-x-auto">
+      <div className="flex gap-2 px-4 border-b overflow-x-auto border-gray-400">
         {CATS.map((c) => (
-          <button key={c} onClick={() => setCat(c)} className={`pb-2 ${cat === c ? "border-b-2 border-black font-semibold" : ""}`}>{c}</button>
+          <button
+            key={c}
+            onClick={() => setCat(c)}
+            className={`px-4 py-3 text-lg whitespace-nowrap ${
+              cat === c
+                ? "border-b-[3px] border-black font-semibold text-black"
+                : "text-gray-600"
+            }`}
+          >
+            {c}
+          </button>
         ))}
       </div>
       {list.map((p) => (
-        <div key={p._id} className="p-4 border-b">
+        <div key={p._id} className="p-4 border-b border-gray-300">
           <div className="flex gap-4">
             <div className="w-36 h-36 shrink-0 bg-gray-200 rounded overflow-hidden">
               {p.image && (
