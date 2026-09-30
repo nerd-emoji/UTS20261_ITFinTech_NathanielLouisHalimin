@@ -21,7 +21,12 @@ export default function Status() {
         {order?.status || "Memuat..."}
       </div>
       <p className="mt-2 text-sm text-gray-500">Total: Rp{order?.total?.toLocaleString("id-ID")}</p>
-      <Link href="/" className="inline-block mt-6 underline">Belanja lagi</Link>
+      <Link
+        href="/"
+        className="inline-block mt-6 bg-gray-700 text-white px-6 py-3 rounded"
+      >
+        Belanja lagi
+      </Link>
     </div>
   );
 }
